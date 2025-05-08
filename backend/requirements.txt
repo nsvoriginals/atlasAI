@@ -1,0 +1,15 @@
+sqlalchemy
+pydantic 
+dotenv
+fastapi
+uvicorn
+pydantic
+pyjwt 
+passlib[bcrypt]
+pdfplumber
+python-docx
+spacy
+regex
+python-multipart
+groq
+pydantic_settings

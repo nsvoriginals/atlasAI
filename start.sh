@@ -35,7 +35,8 @@ if ! command -v docker &> /dev/null; then
     exit 1
 fi
 
-if ! command -v docker compose &> /dev/null && ! command -v docker-compose &> /dev/null; then
+if ! command -v docker compose &> /dev/null && ! command -v docker-compose &> /dev/null && [ ! -x backend/docker-compose ]; then
+
     print_error "Docker Compose is not installed. Please install Docker Compose first."
     exit 1
 fi
@@ -89,11 +90,17 @@ print_success "spaCy models downloaded"
 print_status "Starting Docker Compose in detached mode..."
 if [ -f "docker-compose.yml" ]; then
     # Try the newer syntax first, fallback to older if needed
-    if command -v docker compose &> /dev/null; then
-        docker compose up -d
-    else
-        docker-compose up -d
-    fi
+   if command -v docker compose &> /dev/null; then
+    docker compose up -d
+elif command -v docker-compose &> /dev/null; then
+    docker-compose up -d
+elif [ -x backend/docker-compose ]; then
+    backend/docker-compose up -d
+else
+    print_error "Docker Compose could not be started"
+    exit 1
+fi
+
     
     if [ $? -ne 0 ]; then
         print_error "Failed to start Docker Compose"

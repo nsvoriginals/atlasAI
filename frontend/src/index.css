@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+
+/* Import Satoshi */
+@font-face {
+  font-family: "Satoshi";
+  src: url("/fonts/Satoshi.woff2") format("woff2"),
+       url("/fonts/Satoshi.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Import Nue */
+@font-face {
+  font-family: "Nue";
+  src: url("/fonts/Nue.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
